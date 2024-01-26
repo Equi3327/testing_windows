@@ -1,4 +1,2 @@
-on : push
-  jobs:
-    first_job:
-        
+on: push
+

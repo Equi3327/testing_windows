@@ -24,7 +24,7 @@ jobs:
       - uses: actions/upload-artifact@v3
         with:
             name: windowsTest-app
-            path: build/windows/runner/Release
+            path: build\windows\x64\runner\Release
         # name: windows-app
         # path: build/windows/runner/Release
             

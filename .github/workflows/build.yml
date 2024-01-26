@@ -6,22 +6,12 @@ on:
 jobs:
     first_job:
         runs-on: windows-latest
-
         steps:
-            - uses: subosito/flutter-action@v2
-            with:
-                channel: 'stable'
-            # - run: flutter pub get
-        # - run: flutter test integration_test
-
-
-
-        # - uses: actions/checkout@v4
-
-        # - uses: futureware-tech/simulator-action@v3
-        #     with:
-        #     model: 'iPhone 14'
-
-        # - uses: subosito/flutter-action@v2
-        #     with:
-        #     channel: 'stable'
+        - uses: actions/checkout@v4
+        - uses: subosito/flutter-action@v2
+        with:
+         channel: 'stable'
+        
+        - run: flutter pub get
+            
+        

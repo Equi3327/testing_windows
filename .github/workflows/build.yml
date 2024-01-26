@@ -3,15 +3,22 @@ on:
       branches:
         - main
   
+
 jobs:
-    first_job:
-        runs-on: windows-latest
-        steps:
-        - uses: actions/checkout@v4
-        - uses: subosito/flutter-action@v2
+  test:
+    runs-on: macOS-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+    #   - uses: futureware-tech/simulator-action@v3
+    #     with:
+    #       model: 'iPhone 14'
+
+      - uses: subosito/flutter-action@v2
         with:
-         channel: 'stable'
-        
-        - run: flutter pub get
+          channel: 'stable'
+
+      - run: flutter pub get
             
         

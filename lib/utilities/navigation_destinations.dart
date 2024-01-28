@@ -38,9 +38,9 @@ extension DestinationIcons on AppNavigationDestination {
   IconData icon() {
     switch (this) {
       case AppNavigationDestination.dashboard:
-        return  Icons.dashboard;
+        return Icons.dashboard;
       case AppNavigationDestination.parameters:
-        return  Icons.tune;
+        return Icons.tune;
       case AppNavigationDestination.masters:
         return Icons.groups;
       case AppNavigationDestination.transactions:
@@ -53,6 +53,116 @@ extension DestinationIcons on AppNavigationDestination {
         return Icons.view_compact;
       case AppNavigationDestination.quit:
         return Icons.cancel;
+    }
+  }
+}
+
+extension SubDestinationsInDestination on AppNavigationDestination {
+  List<String> subdestinations() {
+    switch (this) {
+      case AppNavigationDestination.dashboard:
+        return [];
+      case AppNavigationDestination.parameters:
+        return [
+          "Customer / Supplier",
+          "Raw Material",
+          "Design Master",
+          "Rate Master",
+          "Sub Master",
+          "Loss Recovery",
+        ];
+      case AppNavigationDestination.masters:
+        return [
+          "Customer / Supplier",
+          "Raw Material",
+          "Design Master",
+          "Rate Master",
+          "Sub Master",
+          "Loss Recovery",
+          "Design Master",
+          "Rate Master",
+          "Sub Master",
+          "Loss Recovery",
+        ];
+      case AppNavigationDestination.transactions:
+        return [
+          "Customer / Supplier",
+          "Raw Material",
+          "Design Master",
+          "Rate Master",
+          "Sub Master",
+          "Loss Recovery",
+          "Design Master",
+          "Rate Master",
+          "Sub Master",
+          "Loss Recovery",
+          "Design Master",
+          "Rate Master",
+          "Sub Master",
+          "Loss Recovery",
+           "Design Master",
+          "Rate Master",
+          "Sub Master",
+          "Loss Recovery",
+          "Design Master",
+          "Rate Master",
+          "Sub Master",
+          "Loss Recovery",
+        ];
+      case AppNavigationDestination.reports:
+        return [
+          "Customer / Supplier",
+          "Raw Material",
+          "Design Master",
+          "Rate Master",
+          "Sub Master",
+          "Loss Recovery",
+          "Raw Material",
+          "Design Master",
+          "Rate Master",
+          "Sub Master",
+          "Loss Recovery",
+          "Raw Material",
+          "Design Master",
+          "Rate Master",
+          "Sub Master",
+          "Loss Recovery",
+        ];
+      case AppNavigationDestination.addOnMenus:
+        return [
+          "Customer / Supplier",
+          "Raw Material",
+          "Design Master",
+          "Rate Master",
+          "Sub Master",
+          "Loss Recovery",
+        ];
+      case AppNavigationDestination.window:
+        return [
+          "Customer / Supplier",
+          "Raw Material",
+          "Design Master",
+          "Raw Material",
+          "Design Master",
+          "Rate Master",
+          "Sub Master",
+          "Rate Master",
+          "Sub Master",
+          "Loss Recovery",
+        ];
+      case AppNavigationDestination.quit:
+        return [
+          "Customer / Supplier",
+          "Raw Material",
+          "Design Master",
+          "Rate Master",
+          "Sub Master",
+          "Raw Material",
+          "Design Master",
+          "Rate Master",
+          "Sub Master",
+          "Loss Recovery",
+        ];
     }
   }
 }

@@ -31,13 +31,15 @@ class _NavRailExampleState extends State<NavRailExample>
   bool showTrailing = false;
   double groupAlignment = -1.0;
   late AnimationController animationController;
+  AppNavigationDestination selectedDestination =
+      AppNavigationDestination.dashboard;
 
   @override
   void initState() {
     super.initState();
     animationController = AnimationController(
       vsync: this,
-      reverseDuration:  Duration(
+      reverseDuration: Duration(
         milliseconds: 200,
       ),
       duration: Duration(
@@ -51,6 +53,42 @@ class _NavRailExampleState extends State<NavRailExample>
       ? animationController.forward()
       : animationController.reverse();
 
+  void slideRight() {
+    // debugPrint("slideRight slideRight");
+    // if (animationController.isDismissed) {
+    animationController.forward();
+    // }
+  }
+
+  void showSubDestinations(bool show, AppNavigationDestination destination) {
+    if (destination != selectedDestination) {
+      setState(() {
+        selectedDestination = destination;
+      });
+    }
+    if (show) {
+      slideRight();
+    } else {
+      slideLeft();
+    }
+  }
+
+  void slideLeft() {
+    if (animationController.isCompleted) {
+      animationController.reverse();
+    }
+  }
+
+  void keepOpen() {
+    if (animationController.isAnimating) {
+      animationController.forward();
+    } else if (animationController.isDismissed) {
+      animationController.forward();
+    } else {
+      animationController.forward();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,12 +99,28 @@ class _NavRailExampleState extends State<NavRailExample>
             child: AnimatedBuilder(
                 animation: animationController,
                 builder: (context, _) {
-                  double maxSlide = 3/16 * MediaQuery.of(context).size.width * animationController.value;
+                  double maxSlide = 3 /
+                      16 *
+                      MediaQuery.of(context).size.width *
+                      animationController.value;
+                  Animation<Offset> translateAnimation = Tween<Offset>(
+                    begin: Offset(0, 0),
+                    end: Offset(maxSlide, 0), // Adjust end offset as needed
+                  ).animate(CurvedAnimation(
+                    parent: animationController,
+                    curve: Curves.easeInOut, // Choose your desired curve
+                  ));
                   return Stack(
+                    // fit:StackFit.expand,
                     children: [
-                      Transform(
-                          transform: Matrix4.identity()..translate(maxSlide),
-                          child: RailSubDestinations()),
+                      Transform.translate(
+                          // transform: Matrix4.identity()..translate(maxSlide),
+                          offset: translateAnimation.value,
+                          child: RailSubDestinations(
+                            subDestinations:
+                                selectedDestination.subdestinations(),
+                            callback: keepOpen,
+                          )),
                       Container(
                         color: Theme.of(context).colorScheme.primary,
                         child: Column(
@@ -87,7 +141,8 @@ class _NavRailExampleState extends State<NavRailExample>
                             ...AppNavigationDestination.values
                                 .map(
                                   (e) => CustomNavigationRailDestination(
-                                    destination: e, callback: toggle,
+                                    destination: e,
+                                    callback: showSubDestinations,
                                   ),
                                 )
                                 .toList(),
@@ -170,7 +225,11 @@ class _NavRailExampleState extends State<NavRailExample>
           //     ),
           //   ],
           // ),
-           VerticalDivider(thickness: 1, width: 1,color: Theme.of(context).colorScheme.primary,),
+          VerticalDivider(
+            thickness: 1,
+            width: 1,
+            color: Theme.of(context).colorScheme.primary,
+          ),
           // This is the main content.
           Expanded(
             flex: 13,

@@ -19,24 +19,24 @@ class _CustomNavigationRailDestinationState
     extends State<CustomNavigationRailDestination> {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(
-        top: 5.0,
-        left: 21.0,
-        right: 8.0,
-        // bottom: 13.0,
-      ),
-      child: InkWell(
-        onHover: (value) {
-          debugPrint("Hovering on ${widget.destination.title()}");
+    return InkWell(
+       onHover: (value) {
+          debugPrint("Hovering $value on ${widget.destination.title()}");
           // widget.callback();
-          if (value) {
-            widget.callback();
-          }
+          // if (value) {
+            widget.callback(value,widget.destination);
+          // }
         },
         onTap: () {
-          widget.callback();
+          // widget.callback();
         },
+      child: Padding(
+        padding: const EdgeInsets.only(
+          top: 5.0,
+          left: 21.0,
+          right: 8.0,
+          // bottom: 13.0,
+        ),
         child: Container(
           padding: EdgeInsets.symmetric(
             vertical: 8.0,
